@@ -290,7 +290,7 @@ $(document).ready(function () {
 Webflow.push(function () {
     $(document).off('submit');
     $('#application').submit(function (e) {
-        $('#error-block').hide();
+        $('#last-alert').hide();
         e.preventDefault();
         if ($("input[name='newsletter']").is(':checked') && $("input[name='privacy']").is(':checked') && $("input[name='conduct']").is(':checked') && $("input[name='honest']").is(':checked')) {
             const firstName = $('#name-input').val().split(' ').slice(0, -1).join(' ');
@@ -306,7 +306,10 @@ Webflow.push(function () {
             const school = $('#school-input').val();
             const major = $('#major-input').val();
             const githubURI = $('#github-input').val();
-            fetch('https://50bad192.ngrok.io', {
+            const teamOne = $('#teamOne-input').val();
+            const teamTwo = $('#teamTwo-input').val();
+            const teamThree = $('#teamThree-input').val();
+            fetch('https://api.citizenhacks.com/application/create', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -326,14 +329,17 @@ Webflow.push(function () {
                     school,
                     major,
                     githubLink: githubURI,
+                    teamOne,
+                    teamTwo,
+                    teamThree,
                 })
             }).then(function (response) {
-                return response.json();
-            }).then(function (msg) {
                 $('#success-block').show();
+            }).catch(function (err) {
+                $('#error-block').show();
             });
         } else {
-            $('#error-block').show();
+            $('#last-alert').show();
         }
     })
 })
