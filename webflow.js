@@ -152,6 +152,19 @@ $(document).ready(function () {
         e.preventDefault();
         $('.w-round div:nth-child(8)').trigger('tap');
     });
+    $('#github-input').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+    $('#github-step').click(function (e) {
+        e.preventDefault();
+        $('.w-round div:nth-child(11)').trigger('tap');
+    });
+    $('#github-prev').click(function (e) {
+        e.preventDefault();
+        $('.w-round div:nth-child(9)').trigger('tap');
+    });
     $('#about-input').keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -159,11 +172,11 @@ $(document).ready(function () {
     });
     $('#about-step').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(10)').trigger('tap');
+        $('.w-round div:nth-child(12)').trigger('tap');
     });
     $('#about-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(8)').trigger('tap');
+        $('.w-round div:nth-child(10)').trigger('tap');
     });
     $('#project-input').keypress(function (event) {
         if (event.keyCode == 13) {
@@ -172,11 +185,11 @@ $(document).ready(function () {
     });
     $('#project-step').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(11)').trigger('tap');
+        $('.w-round div:nth-child(13)').trigger('tap');
     });
     $('#project-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(9)').trigger('tap');
+        $('.w-round div:nth-child(11)').trigger('tap');
     });
     $('#citizen-input').keypress(function (event) {
         if (event.keyCode == 13) {
@@ -185,11 +198,11 @@ $(document).ready(function () {
     });
     $('#citizen-step').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(12)').trigger('tap');
+        $('.w-round div:nth-child(14)').trigger('tap');
     });
     $('#citizen-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(10)').trigger('tap');
+        $('.w-round div:nth-child(12)').trigger('tap');
     });
     $('#diet-input').keypress(function (event) {
         if (event.keyCode == 13) {
@@ -200,14 +213,53 @@ $(document).ready(function () {
         e.preventDefault();
         if ($('#diet-input').val() != '') {
             $('#diet-alert').hide();
-            $('.w-round div:nth-child(13)').trigger('tap');
+            $('.w-round div:nth-child(15)').trigger('tap');
         } else {
             $('#diet-alert').show();
         }
     });
     $('#diet-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(11)').trigger('tap');
+        $('.w-round div:nth-child(13)').trigger('tap');
+    });
+    $('#teamOne-input').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+    $('#teamTwo-input').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+    $('#teamThree-input').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+    $('#team-step').click(function (e) {
+        e.preventDefault();
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let cond = true
+        $('#team-alert').hide();
+        if ($('#teamOne-input').val() != "" && !re.test($('#teamOne-input').val())) {
+            cond = false;
+        }
+        if ($('#teamTwo-input').val() != "" && !re.test($('#teamTwo-input').val())) {
+            cond = false;
+        }
+        if ($('#teamThree-input').val() != "" && !re.test($('#teamThree-input').val())) {
+            cond = false;
+        }
+        if (cond) {
+            $('.w-round div:nth-child(16)').trigger('tap');
+        } else {
+            $('#team-alert').show();
+        }
+    });
+    $('#team-prev').click(function (e) {
+        e.preventDefault();
+        $('.w-round div:nth-child(14)').trigger('tap');
     });
     $("input[name='newsletter']").keypress(function (event) {
         if (event.keyCode == 13) {
@@ -232,7 +284,7 @@ $(document).ready(function () {
     });
     $('#last-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(12)').trigger('tap');
+        $('.w-round div:nth-child(15)').trigger('tap');
     });
 });
 Webflow.push(function () {
@@ -252,6 +304,8 @@ Webflow.push(function () {
             const project = $('#project-input').val();
             const diet = $('#diet-input').val();
             const school = $('#school-input').val();
+            const major = $('#major-input').val();
+            const githubURI = $('#github-input').val();
             fetch('https://50bad192.ngrok.io', {
                 method: 'POST',
                 headers: {
@@ -259,17 +313,19 @@ Webflow.push(function () {
                     'Content-Type': 'application/json; charset=utf-8',
                 },
                 body: JSON.stringify({
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    gender: gender,
-                    age: age,
-                    levelOfStudy: levelOfStudy,
+                    firstName,
+                    lastName,
+                    email,
+                    gender,
+                    age,
+                    levelOfStudy,
                     passionQuestion: about,
                     citizenshipQuestion: citizen,
                     pastProjectQuestion: project,
-                    diet: diet,
-                    school: school,
+                    diet,
+                    school,
+                    major,
+                    githubLink: githubURI,
                 })
             }).then(function (response) {
                 return response.json();
