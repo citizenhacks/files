@@ -291,6 +291,7 @@ Webflow.push(function () {
     $(document).off('submit');
     $('#application').submit(function (e) {
         $('#last-alert').hide();
+        $('#last-alert').text("Please check all of the boxes above.");
         e.preventDefault();
         if ($("input[name='newsletter']").is(':checked') && $("input[name='privacy']").is(':checked') && $("input[name='conduct']").is(':checked') && $("input[name='honest']").is(':checked')) {
             const firstName = $('#name-input').val().split(' ').slice(0, -1).join(' ');
@@ -334,9 +335,19 @@ Webflow.push(function () {
                     teamThree,
                 })
             }).then(function (response) {
-                $('#success-block').show();
+                console.log(response);
+                json = response.json();
+                if (json.success) {
+                    $('.w-round div:nth-child(17)').trigger('tap');
+                } else {
+                    $('#last-alert').text(json.error);
+                    $('#last-alert').show();
+                }
+                $('.w-round div:nth-child(17)').trigger('tap');
             }).catch(function (err) {
-                $('#error-block').show();
+                $('#last-alert').text("An error has occured. Please try again.");
+                $('#last-alert').show();
+                console.log(err);
             });
         } else {
             $('#last-alert').show();
