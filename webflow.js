@@ -344,7 +344,6 @@ Webflow.push(function () {
                     $('#last-alert').text(json.error);
                     $('#last-alert').show();
                 }
-                $('.w-round div:nth-child(17)').trigger('tap');
             }).catch(function (err) {
                 $('#last-alert').text("An error has occured. Please try again.");
                 $('#last-alert').show();
