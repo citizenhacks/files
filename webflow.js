@@ -310,6 +310,7 @@ Webflow.push(function () {
             const teamOne = $('#teamOne-input').val();
             const teamTwo = $('#teamTwo-input').val();
             const teamThree = $('#teamThree-input').val();
+            const isSubscribedToNewsletter = $("input[name='newsletter']").is(':checked');
             fetch('https://api.citizenhacks.com/application/create', {
                 method: 'POST',
                 headers: {
@@ -333,6 +334,7 @@ Webflow.push(function () {
                     teamOne,
                     teamTwo,
                     teamThree,
+                    isSubscribedToNewsletter,
                 })
             }).then(function (response) {
                 return response.json();
