@@ -335,8 +335,9 @@ Webflow.push(function () {
                     teamThree,
                 })
             }).then(function (response) {
-                console.log(response.json());
-                json = response.json();
+                return response.json();
+            }).then(function (json) {
+                console.log(json);
                 if (json.success) {
                     $('.w-round div:nth-child(17)').trigger('tap');
                 } else {
