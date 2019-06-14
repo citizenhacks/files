@@ -33,7 +33,7 @@ $(document).ready(function () {
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (re.test($('#email-input').val())) {
             $('#email-alert').hide();
-            $('.w-round div:nth-child(4)').trigger('tap');
+            $('.w-round div:nth-child(5)').trigger('tap');
         } else {
             $('#email-alert').show();
         }
@@ -69,16 +69,25 @@ $(document).ready(function () {
     $('#age-step').click(function (e) {
         e.preventDefault();
         const re = /^\d+$/;
+        $('#age-alert').hide();
+        $('#age-alert').text("Please enter a valid number.");
         if (re.test($('#age-input').val())) {
-            $('#age-alert').hide();
-            $('.w-round div:nth-child(6)').trigger('tap');
+            if (parseInt($('#age-input').val(), 10) < 13) {
+                $('#age-alert').text("You must be in high school or university to participate.");
+                $('#age-alert').show();
+            } else if (parseInt($('#age-input').val(), 10) > 99) {
+                $('#age-alert').text("You must be in high school or university to participate.");
+                $('#age-alert').show();
+            } else {
+                $('.w-round div:nth-child(6)').trigger('tap');
+            }
         } else {
             $('#age-alert').show();
         }
     });
     $('#age-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(4)').trigger('tap');
+        $('.w-round div:nth-child(3)').trigger('tap');
     });
     $("input[name='Gender']").keypress(function (event) {
         if (event.keyCode == 13) {
@@ -152,19 +161,6 @@ $(document).ready(function () {
         e.preventDefault();
         $('.w-round div:nth-child(8)').trigger('tap');
     });
-    $('#github-input').keypress(function (event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-        }
-    });
-    $('#github-step').click(function (e) {
-        e.preventDefault();
-        $('.w-round div:nth-child(11)').trigger('tap');
-    });
-    $('#github-prev').click(function (e) {
-        e.preventDefault();
-        $('.w-round div:nth-child(9)').trigger('tap');
-    });
     $('#about-input').keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -172,11 +168,16 @@ $(document).ready(function () {
     });
     $('#about-step').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(12)').trigger('tap');
+        $('#about-alert').hide();
+        if ($('#about-input').val() != '') {
+            $('.w-round div:nth-child(11)').trigger('tap');
+        } else {
+            $('#about-alert').show();
+        }
     });
     $('#about-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(10)').trigger('tap');
+        $('.w-round div:nth-child(9)').trigger('tap');
     });
     $('#project-input').keypress(function (event) {
         if (event.keyCode == 13) {
@@ -185,11 +186,16 @@ $(document).ready(function () {
     });
     $('#project-step').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(13)').trigger('tap');
+        $('#project-alert').hide();
+        if ($('#project-input').val() != '') {
+            $('.w-round div:nth-child(12)').trigger('tap');
+        } else {
+            $('#project-alert').show();
+        }
     });
     $('#project-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(11)').trigger('tap');
+        $('.w-round div:nth-child(10)').trigger('tap');
     });
     $('#citizen-input').keypress(function (event) {
         if (event.keyCode == 13) {
@@ -198,11 +204,16 @@ $(document).ready(function () {
     });
     $('#citizen-step').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(14)').trigger('tap');
+        $('#citizen-alert').hide();
+        if ($('#citizen-input').val() != '') {
+            $('.w-round div:nth-child(13)').trigger('tap');
+        } else {
+            $('#citizen-alert').show();
+        }
     });
     $('#citizen-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(12)').trigger('tap');
+        $('.w-round div:nth-child(11)').trigger('tap');
     });
     $('#diet-input').keypress(function (event) {
         if (event.keyCode == 13) {
@@ -213,14 +224,14 @@ $(document).ready(function () {
         e.preventDefault();
         if ($('#diet-input').val() != '') {
             $('#diet-alert').hide();
-            $('.w-round div:nth-child(15)').trigger('tap');
+            $('.w-round div:nth-child(14)').trigger('tap');
         } else {
             $('#diet-alert').show();
         }
     });
     $('#diet-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(13)').trigger('tap');
+        $('.w-round div:nth-child(12)').trigger('tap');
     });
     $('#teamOne-input').keypress(function (event) {
         if (event.keyCode == 13) {
@@ -252,12 +263,25 @@ $(document).ready(function () {
             cond = false;
         }
         if (cond) {
-            $('.w-round div:nth-child(16)').trigger('tap');
+            $('.w-round div:nth-child(15)').trigger('tap');
         } else {
             $('#team-alert').show();
         }
     });
     $('#team-prev').click(function (e) {
+        e.preventDefault();
+        $('.w-round div:nth-child(13)').trigger('tap');
+    });
+    $('#github-input').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+    $('#github-step').click(function (e) {
+        e.preventDefault();
+        $('.w-round div:nth-child(16)').trigger('tap');
+    });
+    $('#github-prev').click(function (e) {
         e.preventDefault();
         $('.w-round div:nth-child(14)').trigger('tap');
     });
