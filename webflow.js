@@ -42,6 +42,7 @@ $(document).ready(function () {
         e.preventDefault();
         $('.w-round div:nth-child(2)').trigger('tap');
     });
+    /*
     $('#phone-input').keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -61,6 +62,7 @@ $(document).ready(function () {
         e.preventDefault();
         $('.w-round div:nth-child(3)').trigger('tap');
     });
+    */
     $('#age-input').keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -72,10 +74,10 @@ $(document).ready(function () {
         $('#age-alert').hide();
         $('#age-alert').text("Please enter a valid number.");
         if (re.test($('#age-input').val())) {
-            if (parseInt($('#age-input').val(), 10) < 13) {
+            if (parseInt($('#age-input').val(), 10) < 15) {
                 $('#age-alert').text("You must be in high school or university to participate.");
                 $('#age-alert').show();
-            } else if (parseInt($('#age-input').val(), 10) > 99) {
+            } else if (parseInt($('#age-input').val(), 10) > 40) {
                 $('#age-alert').text("You must be in high school or university to participate.");
                 $('#age-alert').show();
             } else {
