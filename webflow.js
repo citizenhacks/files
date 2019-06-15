@@ -287,6 +287,19 @@ $(document).ready(function () {
         e.preventDefault();
         $('.w-round div:nth-child(14)').trigger('tap');
     });
+    $('#hear-step').click(function (e) {
+        e.preventDefault();
+        if (!$("input[name='Hear']").is(':checked')) {
+            $('#hear-alert').show();
+        } else {
+            $('#hear-alert').hide();
+            $('.w-round div:nth-child(17)').trigger('tap');
+        }
+    });
+    $('#hear-prev').click(function (e) {
+        e.preventDefault();
+        $('.w-round div:nth-child(15)').trigger('tap');
+    });
     $("input[name='newsletter']").keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -310,7 +323,7 @@ $(document).ready(function () {
     });
     $('#last-prev').click(function (e) {
         e.preventDefault();
-        $('.w-round div:nth-child(15)').trigger('tap');
+        $('.w-round div:nth-child(16)').trigger('tap');
     });
 });
 Webflow.push(function () {
@@ -337,6 +350,7 @@ Webflow.push(function () {
             const teamTwo = $('#teamTwo-input').val();
             const teamThree = $('#teamThree-input').val();
             const isSubscribedToNewsletter = $("input[name='newsletter']").is(':checked');
+            const referral = $("input:radio[name='Hear']:checked").val();
             fetch('https://api.citizenhacks.com/application/create', {
                 method: 'POST',
                 headers: {
@@ -361,13 +375,14 @@ Webflow.push(function () {
                     teamTwo,
                     teamThree,
                     isSubscribedToNewsletter,
+                    referral,
                 })
             }).then(function (response) {
                 return response.json();
             }).then(function (json) {
                 console.log(json);
                 if (json.success) {
-                    $('.w-round div:nth-child(17)').trigger('tap');
+                    $('.w-round div:nth-child(18)').trigger('tap');
                 } else {
                     $('#last-alert').text(json.error);
                     $('#last-alert').show();
