@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
     $('#name-step').click(function (e) {
         e.preventDefault();
-        const re = /^([a-zA-Z'-.]+ [a-zA-Z'-.]+)$/;
+        const re = /^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/;
         if (re.test($('#name-input').val())) {
             $('#name-alert').hide();
             $('.w-round div:nth-child(3)').trigger('tap');
@@ -74,7 +74,7 @@ $(document).ready(function () {
         $('#age-alert').hide();
         $('#age-alert').text("Please enter a valid number.");
         if (re.test($('#age-input').val())) {
-            if (parseInt($('#age-input').val(), 10) < 15) {
+            if (parseInt($('#age-input').val(), 10) < 13) {
                 $('#age-alert').text("You must be in high school or university to participate.");
                 $('#age-alert').show();
             } else if (parseInt($('#age-input').val(), 10) > 40) {
